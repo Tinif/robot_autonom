@@ -1,0 +1,31 @@
+import os
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+
+    return LaunchDescription([
+
+    Node(
+        package='rplidar_ros',
+        executable='rplidar_composition',
+        name='rplidar_node',
+        output='screen',
+        parameters=[{
+            'serial_port': '/dev/ttyUSB0',
+            'serial_baudrate': 115200,
+            'frame_id': 'laser_frame',
+
+            'inverted': False,
+            'angle_compensate': True,
+            'scan_mode': 'Standard',
+
+            'scan_frequency': 10.0,
+            'angle_min': -3.14159,
+            'angle_max': 3.14159,
+
+            'range_min': 0.15,
+            'range_max': 12.0
+        }]
+    )
+])

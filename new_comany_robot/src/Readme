@@ -1,0 +1,13 @@
+sid_discription pkg
+
+The sid_discription pkg has the urdf of the robot. In that 1. sid.urdf.xacro is the actual model of the robot done with mesh file, the 2. sid_model.urdf.xacro is the model that has the gometry replicating that oringinal model.
+
+
+
+--------------------------------------------
+
+bringup_sid pkg
+
+This has the launch file, gazebo world, rviz environment.
+
+--------------------------------------------

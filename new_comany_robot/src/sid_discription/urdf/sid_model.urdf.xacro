@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+
+<robot name="sid_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+   <xacro:include filename="comm_prop.xacro"/>
+
+
+    <link name="base_footprint" />
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.487 0.513 0.275" />
+            </geometry>
+            <origin xyz="0 0 0.137" rpy="0 0 0" />
+            <material name="cyan" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.487 0.513 0.275" />
+            </geometry>
+            <origin xyz="0 0 0.137" rpy="0 0 0" />
+        </collision>
+        <xacro:box_inertia m="5.0" l="0.487" w="0.513" 
+            h="0.275" xyz="0 0 0.137" rpy="0 0 0"/>
+
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    </joint>
+
+    <link name="left_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+            <material name="grey" />
+        </collision>
+        <xacro:wheel_inertia m="1.0" xyz="0 0 0" 
+        rpy="${pi / 2.0} 0 0" r="0.05" h="0.04" />
+    </link>
+
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="left_wheel_link" />
+        <origin xyz="0.153 0.177 0" rpy="0 0 0"/>
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="right_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+            <material name="grey" />
+        </collision>
+        <xacro:wheel_inertia m="1.0" xyz="0 0 0" 
+        rpy="${pi / 2.0} 0 0" r="0.05" h="0.04" />
+    </link>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="right_wheel_link" />
+        <origin xyz="0.153 -0.177 0" rpy="0 0 0"/>
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="left_caster">
+        <visual>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="grey" />
+        </collision>
+        <xacro:caster_inertia m="0.5" xyz="0 0 0" 
+        rpy="0 0 0" r="0.05" />
+    </link>
+
+    <joint name="left_caster_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="left_caster" />
+        <origin xyz="-0.153 0.166 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="right_caster">
+        <visual>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="0.05" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="grey" />
+        </collision>
+        <xacro:caster_inertia m="0.5" xyz="0 0 0" 
+        rpy="0 0 0" r="0.05" />
+    </link>
+
+    <joint name="right_caster_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="right_caster" />
+        <origin xyz="-0.153 -0.166 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="body_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.160" length="1.330" />
+            </geometry>
+            <origin xyz="0 0 0.665" rpy="0 0 0" />
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+            <origin xyz="0 0 0.665" rpy="0 0 0" />
+            <material name="grey" />
+        </collision>
+        <xacro:wheel_inertia m="1.0" xyz="0 0 0.665" 
+        rpy="0 0 0" r="0.160" h="1.330" />
+    </link>
+
+    <joint name="body_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="body_link" />
+        <origin xyz="0 0 0.305" rpy="0 0 0"/>
+    </joint>
+
+
+   <xacro:include filename="sid_model_gazebo.xacro"/>
+   <xacro:include filename="lidar_link.xacro"/>
+
+
+</robot>
